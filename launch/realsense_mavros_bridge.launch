@@ -1,0 +1,21 @@
+<launch>
+
+<arg name="rs_x" value="0" />
+<arg name="rs_y" value="0" />
+<arg name="rs_z" value="-3" />
+<arg name="rs_roll" value="0" />
+<arg name="rs_pitch" value="1.0471975512" />
+<arg name="rs_yaw" value="0" />
+
+<param name="rs_x" type="double" value="$(arg rs_x)" />
+<param name="rs_y" type="double" value="$(arg rs_y)" />
+<param name="rs_z" type="double" value="$(arg rs_z)" />
+<param name="rs_roll" type="double" value="$(arg rs_roll)" />
+<param name="rs_pitch" type="double" value="$(arg rs_pitch)" />
+<param name="rs_yaw" type="double" value="$(arg rs_yaw)" />
+
+<node name="bridge_ros_node" pkg="realsense_mavros_bridge" type="bridge_ros_node" output="screen"/>
+
+
+
+</launch>
