@@ -69,7 +69,7 @@ void Bridge::odomCallback_(const nav_msgs::Odometry& odom){
     tf2::Transform rs_transform;
     tf2::fromMsg(rs_pose, rs_transform);
 
-    tf2::Transform uav_tranform = rs_transform*rs_mount_transform_.inverse();
+    tf2::Transform uav_tranform = rs_mount_transform_*rs_transform*rs_mount_transform_.inverse();
     tf2::toMsg(uav_tranform, uav_pose.pose);
 
     pub_vision_pose_.publish(uav_pose);
