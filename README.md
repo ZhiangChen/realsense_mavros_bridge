@@ -43,3 +43,6 @@ These are the position and euler angles of T265 w.r.t. FCU mavros coordinates (f
 
 ## How to fuse realsense and PX4
 Follow the instructions in the document: Using Vision or Motion Capture Systems for Position Estimation (https://docs.px4.io/master/en/ros/external_position_estimation.html). If you already can use mocap, then you just need to replace `rosrun relay` with `roslaunch realsense_mavros_bridge realsense_mavros_bridge.launch`
+
+## Todo: Fuse realsense, GPS, and PX4
+
