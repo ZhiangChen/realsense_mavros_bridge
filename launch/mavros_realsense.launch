@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+<!-- mavros -->
+<arg name="fcu_url" default="/dev/ttyUSB0:921600" />
+<arg name="gcs_url" default="" />
+<arg name="tgt_system" default="1" />
+<arg name="tgt_component" default="1" />
+<arg name="log_output" default="screen" />
+<arg name="fcu_protocol" default="v2.0" />
+<arg name="respawn_mavros" default="false" />
+
+<include file="$(find mavros)/launch/node.launch">
+	<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
+	<arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
+
+	<arg name="fcu_url" value="$(arg fcu_url)" />
+	<arg name="gcs_url" value="$(arg gcs_url)" />
+	<arg name="tgt_system" value="$(arg tgt_system)" />
+	<arg name="tgt_component" value="$(arg tgt_component)" />
+	<arg name="log_output" value="$(arg log_output)" />
+	<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
+	<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
+</include>
+
+<!-- realsense -->
+<include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
+
+
+<!-- realsense_mavros_bridge -->
+<arg name="rs_x" value="0.242" />
+<arg name="rs_y" value="0" />
+<arg name="rs_z" value="-0.035" />
+<arg name="rs_roll" value="0" />
+<arg name="rs_pitch" value="1.1344640137963142" />
+<arg name="rs_yaw" value="0" />
+
+<param name="rs_x" type="double" value="$(arg rs_x)" />
+<param name="rs_y" type="double" value="$(arg rs_y)" />
+<param name="rs_z" type="double" value="$(arg rs_z)" />
+<param name="rs_roll" type="double" value="$(arg rs_roll)" />
+<param name="rs_pitch" type="double" value="$(arg rs_pitch)" />
+<param name="rs_yaw" type="double" value="$(arg rs_yaw)" />
+
+<node name="bridge_ros_node" pkg="realsense_mavros_bridge" type="bridge_ros_node" output="screen"/>
+
+
+
+</launch>

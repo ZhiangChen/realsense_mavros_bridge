@@ -1,8 +1,8 @@
 <launch>
 
-<arg name="rs_x" value="0" />
+<arg name="rs_x" value="0.242" />
 <arg name="rs_y" value="0" />
-<arg name="rs_z" value="-3" />
+<arg name="rs_z" value="-0.035" />
 <arg name="rs_roll" value="0" />
 <arg name="rs_pitch" value="1.0471975512" />
 <arg name="rs_yaw" value="0" />
