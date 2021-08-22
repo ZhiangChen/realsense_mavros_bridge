@@ -22,6 +22,8 @@ protected:
     double x_=0, y_=0, z_=0, roll_=0, pitch_=0, yaw_=0;  // camera's pose w.r.t. FCU mavros origin (FLU)
     tf2::Transform rs_mount_transform_;
     tf2::Transform rs_init_transform_;
+    tf2::Transform rs_mount_transform_inverse_;
+    tf2::Transform rs_init_transform_inverse_;
 
     ros::Publisher pub_vision_pose_;
     ros::Subscriber sub_vision_odom_;

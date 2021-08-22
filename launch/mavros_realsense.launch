@@ -9,6 +9,8 @@
 <arg name="log_output" default="screen" />
 <arg name="fcu_protocol" default="v2.0" />
 <arg name="respawn_mavros" default="false" />
+<arg name="rosbag" default="false" />
+<arg name="rosbag_image" default="false" />
 
 <include file="$(find mavros)/launch/node.launch">
 	<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
@@ -44,6 +46,13 @@
 
 <node name="bridge_ros_node" pkg="realsense_mavros_bridge" type="bridge_ros_node" output="screen"/>
 
+<!-- rosbag -->
+<!-- command:
+roslaunch realsense_mavros_bridge mavros_realsense.launch rosbag:=true 
+-->
 
+<node name="rosbag" pkg="rosbag" type="record" args='-e "/mavros/(.*)"' if="$(eval arg('rosbag') == true)" />
+
+<node name="rosbag" pkg="rosbag" type="record" args='-e "/mavros/(.*)" /zed2/zed_node/rgb/image_rect_color/compressed' if="$(eval arg('rosbag_image') == true)" />
 
 </launch>

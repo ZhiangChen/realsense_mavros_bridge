@@ -60,6 +60,9 @@ Bridge::Bridge(ros::NodeHandle& nh): nh_(nh){
 
     geometry_msgs::Quaternion rs_quaternion_msg = tf2::toMsg(rs_quaternion);
     ROS_INFO_STREAM("Realsense quaternion: \n" << rs_quaternion_msg);
+    
+    rs_mount_transform_inverse_ = rs_mount_transform_.inverse();
+    rs_init_transform_inverse_ = rs_init_transform_.inverse();
 
     pub_vision_pose_ = nh_.advertise<geometry_msgs::PoseStamped>("/mavros/vision_pose/pose", 0);
     sub_vision_odom_ = nh_.subscribe("/camera/odom/sample", 1, &Bridge::odomCallback_, this);
@@ -74,7 +77,7 @@ void Bridge::odomCallback_(const nav_msgs::Odometry& odom){
     tf2::Transform rs_transform;
     tf2::fromMsg(rs_pose, rs_transform);
 
-    tf2::Transform uav_tranform = rs_mount_transform_*rs_init_transform_.inverse()*rs_transform*rs_mount_transform_.inverse();
+    tf2::Transform uav_tranform = rs_mount_transform_*rs_init_transform_inverse_*rs_transform*rs_mount_transform_inverse_;
     tf2::toMsg(uav_tranform, uav_pose.pose);
 
     pub_vision_pose_.publish(uav_pose);

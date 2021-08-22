@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+
+<arg name="rosbag" default="false" />
+
+<node name="rosbag" pkg="rosbag" type="record" output="screen" args="-a" if="$(eval arg('rosbag') == true)" />
+
+</launch>
